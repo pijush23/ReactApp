@@ -1,0 +1,50 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+    const A=({fnCheck})=>{
+        const [result,setResult]=React.useState('')
+        React.useEffect(()=>{
+            setResult(fnCheck())
+            console.log('A rendred')
+        },[fnCheck])
+        return <h3>{result}</h3>
+    }
+    const App=()=>{
+        const [cnt,setCnt]=React.useState(0)
+        const [name,setName]=React.useState('Sachin')
+        const fnCheck=React.useCallback(()=>{
+            console.log('10k lines')
+            return cnt %2==0 ? 'Even':'Odd'
+        },[cnt])
+        const fnClick=()=>{
+            setCnt(cnt+1)
+        }
+        const fnToggle=()=>{
+            setName(name=='Sachin' ? 'Dhoni':'Sachin')
+        }
+        return  <div>
+                <h3>{cnt}</h3>
+                <button onClick={fnClick}>click</button>
+                <A fnCheck={fnCheck} />
+                <h3>{name}</h3>
+                <button onClick={fnToggle}>Toggle</button>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

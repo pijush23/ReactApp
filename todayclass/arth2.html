@@ -1,0 +1,56 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root">
+
+<style>
+
+</style>
+
+<script type="text/babel">
+  
+    const App=()=>{
+      
+      const [no1,setNo1]=React.useState(0)
+      const [no2,setNo2]=React.useState(0)
+      const [sum,setSum]=React.useState(0)
+
+        const f1=(eve)=>{
+          const n1= Number(eve.target.value)
+          setNo1(n1)
+        }
+        const f2=(eve)=>{
+         const n2=Number(eve.target.value) 
+         setNo2(n2)  
+        }
+        const fnClick=()=>{
+         const result=no1+no2;
+         setSum(result)
+        }
+        return <div>
+               <p>
+                  <b>no1: </b><input type='number' onChange={f1} />
+               </p>
+               <p>
+                  <b>no2: </b><input type='number' onChange={f2} />
+               </p>
+               <p>
+                  <button onClick={fnClick}>sum</button>
+               </p>
+
+               <h3>
+                 Result is : <span>{sum}</span>
+               </h3>
+
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>
+

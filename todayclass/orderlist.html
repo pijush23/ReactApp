@@ -1,0 +1,32 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const players=['Sachin','Dhoni','Kohli','UV','Panth']
+
+        return <div>
+               <ol>
+                {
+                    players.map((v,i)=>{
+                        return <li key={i}>{v}</li> 
+                    })
+                }
+                </ol>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

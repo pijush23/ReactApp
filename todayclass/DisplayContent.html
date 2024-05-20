@@ -1,0 +1,39 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const obj={n1:1,n2:2,val:{n3:3}}
+        return <h1>
+            <pre>
+                {JSON.stringify(obj,null,2)}
+           
+        {
+            `
+<p>
+    <span>Sachin</span>
+</p> 
+            `
+        }
+    </pre>
+       
+            </h1>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

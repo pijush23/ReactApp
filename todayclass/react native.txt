@@ -1,0 +1,19 @@
+1. create an application 
+
+   npx create-expo-app <my-app-name>
+
+2. If you want to run in web need to install some libs(check in command prompt)
+
+2. complete  the requirement
+
+3. create an account in expo.
+
+   https://expo.dev/
+
+4. To build your appliction : 
+    
+  a. npm install -g eas-cli
+  b. eas login(expo credentials)
+  c. eas build:configure
+  d. eas build --platform android/ eas build --platform all
+  e. eas build:list

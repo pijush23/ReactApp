@@ -1,0 +1,26 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        debugger;
+        console.log('Before Mounting')
+        React.useEffect(()=>{
+            debugger;
+            console.log('After Mounting')
+        },[])
+        debugger;
+        return <h1>App</h1>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

@@ -1,0 +1,46 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const noRef=React.useRef()
+        const [msg,setMsg]=React.useState('')
+        const fnClick=()=>{
+            let no=noRef.current.value;
+            let result=checkPrime(no)
+            setMsg(result)
+        }
+        const checkPrime=(no)=>{
+               let factors=0
+              for(let i=1;i<=no;i++){
+                    if(no % i==0){
+                        factors++
+                    }
+              }
+
+             return factors == 2 ? 'PRIME': 'NOT A PRIME'
+        }
+        return <div>
+               <p>No: <input ref={noRef} /></p> 
+               <button onClick={fnClick}>Submit</button>
+               <h3>{msg}</h3>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

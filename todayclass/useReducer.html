@@ -1,0 +1,70 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const init={
+            name:'',
+            cnt:1
+        }
+        const reducer=(currData,newData)=>{
+             switch(newData.type){
+                case 'NAME_UPDATE':
+                    currData={
+                        ...currData,
+                        name:newData.payload
+                    }
+                    break;
+                case 'CNT_UPDATE':
+                    currData={
+                        ...currData,
+                        cnt:currData.cnt+1
+                    }
+                    break;
+             }
+             return currData;
+        }
+
+        const [state,dispatch]=React.useReducer(reducer,init)
+
+        const nameRef=React.useRef()
+        const fnNameChange=()=>{
+           const name=nameRef.current.value;
+           dispatch({
+             type:'NAME_UPDATE',
+             payload:name
+           })
+        }
+        const fnIncrement=()=>{
+            dispatch({
+             type:'CNT_UPDATE',
+           })
+        }
+        return <div>
+               <p><input ref={nameRef} /><input onClick={fnNameChange} type='button' value='submit' /></p>
+               <h3>{`My name is ${state.name}. `}</h3>
+               <p>
+                 <h1>{state.cnt}</h1>
+                 <p>
+                 <input onClick={fnIncrement} type='button' value='submit' /></p>
+                </p>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

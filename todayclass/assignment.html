@@ -1,0 +1,66 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const [defaultData,setDefaultData]=React.useState(['I','J','K','L'])
+        const [data,setData]=React.useState(['A',"B",'C','D','E','F'])
+        const [isShowClose,setIsShowClose]=React.useState(true)
+        const [isShowAdd,setIsShowAdd]=React.useState(true)
+        const fnRemove=(eve)=>{
+            let val=eve.target.id
+            setData([...data,val])
+            let _data=defaultData;
+            let _index=_data.indexOf(val)
+            _data.splice(_index,1)
+            setDefaultData(_data)
+            setIsShowClose(_data.length==3 ? false : true)
+            setIsShowAdd(_data.length == 6 ? false : true)
+        }
+        const fnAdd=(eve)=>{
+            let val=eve.target.id
+            let _defaultData=[...defaultData,val]
+            setDefaultData(_defaultData)
+
+            let _data=data;
+            let _index=_data.indexOf(val)
+            _data.splice(_index,1)
+            setData(_data)
+            setIsShowClose(_defaultData.length>3 ? true : false)
+            setIsShowAdd(_defaultData.length == 6 ? false : true)
+        }
+        return <div>
+                 <div style={{border:'1px solid red'}}>
+                    {
+                        defaultData.map((v,i)=>{
+                            return <p key={i}>{v} {isShowClose && <button id={v} onClick={fnRemove}>x</button>}</p>
+                        })
+                    }
+                 </div>
+                 <div style={{border:'1px solid red'}}>
+                    {
+                        data.map((v,i)=>{
+                            return <p key={i}>{v}<button disabled={!isShowAdd} id={v} onClick={fnAdd}>+</button></p>
+                        })
+                    }
+                 </div>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

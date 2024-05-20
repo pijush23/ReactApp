@@ -1,0 +1,42 @@
+<script src="react.development.js"></script>
+<script src="babel.js"></script>
+<script src="react-dom.development.js"></script>
+
+<div id="root"></div>
+
+<style>
+  
+</style>
+
+<script type="text/babel">
+
+
+    class Player extends React.Component{
+        key='loc'
+        render(){
+            return <h1>My name is {this.props.n} , I am from {this.props[this.key]}. </h1>
+        }
+    }
+
+    class App extends React.Component{
+          v1='Sachin'
+          v2='Mumbai'
+          content(){
+             return <div>
+            <Player n={this.v1} loc={this.v2} />
+            <Player n='Dhoni' loc='Ranchi' />
+            <Player n='Kohli' loc='Delhi' />
+            <Player n='Panth' loc='Delhi' />
+          </div>
+          }
+          render(){
+            return this.content()
+          }
+    }
+   
+    
+    var root=ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>
+

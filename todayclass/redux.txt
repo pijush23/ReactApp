@@ -1,0 +1,126 @@
+1. create react application 
+
+    cmd> npx create-next-app my-react-app
+
+    and create required components(A,B,C)
+
+
+2. install below libs to implement redux.
+
+   npm i @reduxjs/toolkit react-redux redux-logger
+
+3. create initial data object
+   
+   init.js 
+
+   export const init={
+	name:'',
+          loc:''
+   }
+
+4. create store
+
+import {configureStore} from '@reduxjs/toolkit'
+
+store.js 
+
+const appStore=configureStore({
+   reducer:{},
+   middlewares:[]
+})
+
+
+5. create a function(reducer) 
+
+import {init} from './init'
+
+const appReducer=(state=init,action)=>{
+    return state
+}
+
+6. register function(reducer) with the store
+
+import {configureStore} from '@reduxjs/toolkit'
+import appReducer from './appReducer'
+
+const appStore=configureStore({
+    reducer:{
+     appReducer
+    },
+})
+
+export default appStore
+
+7. provide the store to react application
+
+index.js 
+
+import appStore from './store';
+import {Provider} from 'react-redux'
+
+
+    <Provider store={appStore}>
+        
+    </Provider>
+   
+
+8.From A,B components , need to dispatch the data to reducer . 
+
+A.js 
+
+import React, { useRef } from 'react'
+import appStore from './store'
+const A = () => {
+    const nameRef=useRef()
+    const fnClick=()=>{
+       const name= nameRef.current.value;
+       appStore.dispatch({
+         type:"NAME_UPDATE",
+         payload:name
+       })
+      
+    }
+  return (
+    <div>
+        <h1>A</h1>
+        <p>
+            Name:<input ref={nameRef} />
+        </p>
+        <button onClick={fnClick}>Submit</button>
+    </div>
+  )
+}
+
+export default A
+
+9. In C component, need to get the data from store using connect method. 
+
+C.js 
+
+import React from 'react'
+import {connect} from 'react-redux'
+
+let C = (props) => {
+  return (
+    <div>
+        <h1>C</h1>
+        <h3>Name: {props.name} </h3>
+        <h3>Location:{props.loc}</h3>
+    </div>
+  )
+}
+
+C=connect(
+  (state)=>{
+    const {name,loc}=state.appReducer
+   return {
+    name,loc
+   }
+  },
+(dispatch)=>{
+return {
+}
+}
+)(C)
+
+export default C

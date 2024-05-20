@@ -1,0 +1,78 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const [size,setSize]=React.useState()
+        const [type,setType]=React.useState()
+        const [file,setFile]=React.useState()
+        const [base64, setBase64]=React.useState()
+        const fnClick=async ()=>{
+            // const dataObj={
+            //     data:file
+            // }
+            // console.log(dataObj)
+            const data = new FormData();
+            data.append('name', 'Sachin');
+            data.append('loc', 'Mumabi');
+            data.append('photo', file);
+            let res = await fetch(
+                'url',
+                {
+                method: 'post',
+                body: data,
+                headers: {
+                    'Content-Type': 'multipart/form-data; ',
+                },
+                }
+            );
+        }
+        const fnChange=(eve)=>{
+            debugger;
+            const _selFile=eve.target.files[0];
+            const {type,size}=_selFile
+            setSize(size)
+            setType(type)
+            setFile(_selFile)
+            const readerObj=new FileReader();
+            readerObj.readAsDataURL(_selFile)
+            readerObj.onload=()=>{
+                setBase64(readerObj.result)
+            }
+            readerObj.onerror=()=>{
+                setBase64(readerObj.result)
+            }
+        }
+        return <div>
+                <p>
+                   Photo:<input type='file' onChange={fnChange}  />
+                </p>
+                <p>
+                    Size:{size} Type:{type}
+                </p>
+                <p>
+                    <iframe src={base64} width="200" height="200" />
+                </p>
+                <p>
+                    <button onClick={fnClick}>Submit</button>
+                </p>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

@@ -1,0 +1,51 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const [data,setData]=React.useState([])
+        const [val,setVal]=React.useState('')
+
+        const fnOnChange=(eve)=>{
+            setVal(eve.target.value.toUpperCase().trim())
+        }
+        const fnClick=()=>{
+            if(!val)return;
+            if(data.includes(val)){
+                alert('name already existed')
+                return;
+            }
+            setData([...data,val])
+            setVal('')
+        }
+        return <div>
+              <p>Player Name:<input value={val} onChange={fnOnChange} /></p>
+              <p><button onClick={fnClick}>submit</button></p>
+              <ol>
+                {
+                    data.map((v,i)=>{
+                        return <li key={i}>{v}</li>
+                    })
+                }
+              </ol>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+
+

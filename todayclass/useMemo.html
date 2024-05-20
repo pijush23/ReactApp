@@ -1,0 +1,43 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const [cnt,setCnt]=React.useState(0)
+        const [name,setName]=React.useState('Sachin')
+        const fnCheck=React.useMemo(()=>{
+            console.log('10k lines')
+            return cnt %2==0 ? 'Even':'Odd'
+        },[cnt])
+        const fnClick=()=>{
+            setCnt(cnt+1)
+        }
+        const fnToggle=()=>{
+            setName(name=='Sachin' ? 'Dhoni':'Sachin')
+        }
+        return  <div>
+                <h3>{cnt}</h3>
+                <button onClick={fnClick}>click</button>
+                <h1>{fnCheck}</h1>
+                <h3>{name}</h3>
+                <button onClick={fnToggle}>Toggle</button>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

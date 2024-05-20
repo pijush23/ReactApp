@@ -1,0 +1,18 @@
+$text-clr:green;
+
+.cg{
+    color:$text-clr;
+}
+
+p{
+    span{
+        color:red
+    }
+    i{
+        color:blue;
+    }
+    b{
+        color:yellow;
+    }
+}
+

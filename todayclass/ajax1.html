@@ -1,0 +1,103 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+    const Table=(props)=>{
+        const {headings,data,columns}=props;
+        return <table border='1px'>
+                  <thead>
+                     <tr>
+                        {
+                            headings.map((v,i)=>{
+                                return <th key={i}>{v}</th>
+                            })
+                        }
+                      </tr>
+                  </thead> 
+                  <tbody>
+                     {
+                        data.map((obj,ind)=>{
+                            return <tr key={ind}>
+                                   {
+                                    columns.map((v,i)=>{
+                                        return <td key={i}>{obj[v]}</td>
+                                    })
+                                   }
+                                    
+                                </tr>
+                        })
+                     }
+                  </tbody>
+                </table>
+           
+    }
+  
+    const App=()=>{
+        const [data,setData]=React.useState([])
+        const playerTblHeadings=['Name','User Name','Email']
+        const playerTblKeys=['name','username','email']
+
+        const fnClick=()=>{
+
+           // Handle AJAX 
+           // https://jsonplaceholder.typicode.com/users, get
+
+           const obj=new XMLHttpRequest();
+
+           //prepare the req 
+
+           obj.open('get','https://jsonplaceholder.typicode.com/users')
+
+           //send the req 
+           
+           obj.send()
+
+           // server side app receive the req and process and send res back to client
+
+           //receive the respose from server 
+
+           // may be success
+
+           obj.onload=()=>{
+              const res= obj.responseText
+              setData(JSON.parse(res))
+              console.log(res)
+           }
+
+           // may be failure
+
+           obj.onerror=()=>{
+            setData([])
+
+           }
+        }
+        return <div>
+                <button onClick={fnClick}>Get Users</button>
+                <div>
+                   {data.length > 0  && <Table 
+                       headings={playerTblHeadings}
+                       columns={playerTblKeys}
+                       data={data}
+                    />
+                    
+                   }
+                </div>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

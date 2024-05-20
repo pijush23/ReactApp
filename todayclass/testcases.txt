@@ -1,0 +1,54 @@
+1. create next application 
+
+  >npm create-next-app my-test-app
+
+2. add below libs
+
+  "devDependencies": {
+   "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-react": "^7.22.3"
+  },
+
+3. add  babel.config.js file in  the application at package.json level
+
+babel.config.js
+
+module.exports = {
+    presets: [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+  };
+
+4. add below code in the package.json file
+
+ "jest": {
+    "testEnvironment": "jsdom"
+  }
+
+5. create
+
+ a.  __tests__ folder and place test file with the extension of ----.js
+ b. create a file   ----.test.js
+ c. create a file ----.spec.js
+
+   
+
+6. To run the tests add this command in package.json
+
+ "scripts": {
+    "test": "node ./node_modules/jest/bin/jest.js  --watch"
+  },
+
+to see the coverage report 
+
+ "scripts": {
+    "test": "node ./node_modules/jest/bin/jest.js --coverage --watch"
+  },
+
+>npm test

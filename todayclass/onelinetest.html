@@ -1,0 +1,77 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const data=[
+            {
+                no:1,
+                que:'Below which hook used  to create the empty referece ?',
+                options:['useMemo','useRef','useState','useEffect'],
+                type:'s',
+                ans:'B'
+            },
+            {
+                no:2,
+                que:'Below which are inline Elements ?',
+                options:['span','div','b','p'],
+                type:'m',
+                ans:'AC'
+            },
+            {
+                no:3,
+                que:'How to pass the data from child to parent ?',
+                options:['callback','props','state','context'],
+                type:'s',
+                ans:'A'
+            },
+            {
+                no:4,
+                que:'Below which members are coming from React.component class ?',
+                options:['setState','useRef','props','context'],
+                type:'m',
+                ans:'ACD'
+            },
+            {
+                no:5,
+                que:'Why we go for useContext?',
+                options:['to set the state','to get the data from context','retrive props','none'],
+                type:'s',
+                ans:'B'
+            }
+        ]
+        
+        return <div>
+              <h1 style={{textAlign:'center',color:'red'}}>Write Test</h1>
+              {
+                data.map((obj,ind)=>{
+                    const {no,que,options,type}=obj
+                    return <div key={ind}>
+                            <h3>{no}.{que}</h3>
+                            {
+                                options.map((v,i)=>{
+                                    return <p key={i}>{type=='s' ? <input name={no} type='radio' /> : <input type='checkbox' />}{v}</p>
+                                })
+                            }
+                        </div>
+                })
+              }
+              <button>Submit Test</button>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

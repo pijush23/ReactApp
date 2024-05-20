@@ -1,0 +1,43 @@
+1. create react application
+
+2. npm i @apollo/client graphql 
+
+3. add this in the root component file.
+
+import { ApolloClient, InMemoryCache,ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:2040/graphql',
+  cache: new InMemoryCache(),
+});
+
+  <ApolloProvider client={client}>
+      <components >
+  </ApolloProvider>,
+  </React.StrictMode>
+
+
+4. create queries   to pass as an input to your graphql endpoint 
+
+
+import {gql} from '@apollo/client'
+
+
+export const GET_WISH_MSG = gql`
+ query Query {
+    wish
+  }
+`;
+
+5. in your app.js 
+
+import {GET_WISH_MSG} from './queries/wish'
+
+  const {loading,data,error}=useQuery(GET_WISH_MSG)
+
+  // const [getUsers,{loading:usersLoading,data:usersData,error:usersError}]=useLazyQuery(GET_USERS)
+  // const [regUser,{loading:regUserLoading,data:regUserData,error:regUserError}]=useMutation(REG_USER)
+
+6. in your browser you can see the  GET_WISH_MSG query output
+
+

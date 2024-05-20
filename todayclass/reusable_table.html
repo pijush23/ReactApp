@@ -1,0 +1,97 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+    const Table=(props)=>{
+        const {headings,data,columns}=props;
+        return <table border='1px'>
+                  <thead>
+                     <tr>
+                        {
+                            headings.map((v,i)=>{
+                                return <th key={i}>{v}</th>
+                            })
+                        }
+                      </tr>
+                  </thead> 
+                  <tbody>
+                     {
+                        data.map((obj,ind)=>{
+                            return <tr key={ind}>
+                                   {
+                                    columns.map((v,i)=>{
+                                        return <td key={i}>{obj[v]}</td>
+                                    })
+                                   }
+                                    
+                                </tr>
+                        })
+                     }
+                  </tbody>
+                </table>
+           
+    }
+    const App=()=>{
+        const players=[
+            {
+                name:'Sachin',
+                runs:20000,
+                loc:'MUmbai'
+            },
+            {
+                name:'Dhoni',
+                runs:10000,
+                loc:'Ranchi'
+            }
+        ]
+        const students=[
+            {
+                stdName:'s1',
+                stdMarks:88
+            },
+            {
+                stdName:'s2',
+                stdMarks:80
+            },
+            {
+                stdName:'s3',
+                stdMarks:78
+            }
+        ]
+        const playerTblHeadings=['Name','Runs','Location']
+        const playerTblKeys=['name','runs','loc']
+
+        const stdTblHeadings=['Student Name','Marks']
+        const stdTblKeys=['stdName','stdMarks']
+        return <div>
+              <h3>Players</h3> 
+              <Table 
+                 headings={playerTblHeadings}
+                 data={players}
+                 columns={playerTblKeys}
+              />
+              <h3>Students</h3> 
+              <Table 
+                 headings={stdTblHeadings}
+                 data={students}
+                 columns={stdTblKeys}
+              />
+                </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

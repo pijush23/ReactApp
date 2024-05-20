@@ -1,0 +1,37 @@
+<script src="react.development.js"></script>
+<script src="babel.js"></script>
+<script src="react-dom.development.js"></script>
+
+<div id="root"></div>
+
+
+<script type="text/babel">
+    const A=({name})=>{
+        // const {name}=props;
+        return <div>
+              <h3>A:{name} </h3>
+            </div>
+    }
+    const App=()=>{
+        const nameRef=React.useRef()
+        const [data,setData]=React.useState('')
+        const fnClick=()=>{
+            const name=nameRef.current.value;
+            setData(name)
+        }
+        return <div>
+              <h1>App</h1>
+              <p>Name:<input ref={nameRef} /></p>
+              <p><button onClick={fnClick}>submit</button></p>
+              <A name={data} />
+            </div>
+    }
+
+    var root=ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>
+
+
+
+

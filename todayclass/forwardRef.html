@@ -1,0 +1,34 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+    const A=React.forwardRef((props,ref)=>{
+        return <p>Name:<input ref={ref} /></p>
+    })
+    const App=()=>{
+        const nameRef=React.useRef()
+        const fnClick=()=>{
+            nameRef.current.value='Sachin'
+        }
+        return <div>
+              <A ref={nameRef} n1="10" n2="20" />
+              <button onClick={fnClick}>Change Name</button>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

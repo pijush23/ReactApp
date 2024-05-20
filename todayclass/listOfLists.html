@@ -1,0 +1,55 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+<style>
+ .mb-30{
+    margin-bottom: 30px;
+ }
+ .pl-30{
+    padding-left: 30px;
+ }
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const players=[
+            {
+                heading:'Sachin',
+                data:['Mumbai',20000]
+            },
+            {
+                heading:'Dhoni',
+                data:['Ranchi',10000]
+            },
+            {
+                heading:'Kohli',
+                data:['Delhi',15000]
+            }
+        ]
+
+        return <div>
+                {
+                    players.map((obj,index)=>{
+                        return <div className='mb-30' key={index}>
+                                    <h3>{obj.heading}</h3>
+                                    {
+                                        obj.data.map((v,i)=>{
+                                            return <div key={i} className="pl-30">---->{v}</div>
+                                        })
+                                    }
+                        </div> 
+                    })
+                }
+              </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

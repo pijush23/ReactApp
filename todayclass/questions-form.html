@@ -1,0 +1,148 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+<link rel="stylesheet" href="bootstrap.css" >
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+    const Select=(props)=>{
+        const {name,lbl,options}=props;
+        return  <div className="row mb-3">
+                     <div className="col-sm-5 text-end">
+                          <b>{lbl}:</b>
+                     </div>
+                     <div className="col-sm-3">
+                        <select name={name} className="form-control">
+                            {
+                                options.map((opt,ind)=>{
+                                    return <option key={ind}>{opt}</option>
+                                })
+                            }
+                            </select>
+                    </div>
+                  </div>
+    }
+    const TextArea=(props)=>{
+        const {lbl,name,ph}=props
+        return  <div className="row mb-3">
+                     <div className="col-sm-5 text-end">
+                          <b>{lbl}:</b>
+                     </div>
+                     <div className="col-sm-3">
+                        <textarea name={name} placeholder={ph} className="form-control"></textarea>
+                    </div>
+                  </div>
+    }
+    const Input=(props)=>{
+        const {name,lbl,tag,ph,type,options}=props;
+        const fn=()=>{
+            switch(type){
+                case 'text':
+                   return <input name={name} placeholder={ph} type={type} className="form-control" />
+                case 'radio':
+                   return options.map((opt)=>{
+                       return <><input name={name} type={type} /><span className="ms-2 me-3">{opt}</span></>
+                   })
+    
+            }
+        }
+        return  <div className="row mb-3">
+                     <div className="col-sm-5 text-end">
+                          <b>{lbl}:</b>
+                     </div>
+                     <div className="col-sm-3">
+                        {fn()}
+                    </div>
+                  </div>
+    }
+
+    const App=()=>{
+       const inputControls=[
+        {
+            name:'que',
+            lbl:'Question',
+            tag:'textarea',
+            ph:'Enter Question'
+        },
+        {
+            name:'opt1',
+            lbl:'Option1',
+            tag:'input',
+            ph:'Enter Option1',
+            type:'text'
+        },
+        {
+            name:'opt2',
+            lbl:'Option2',
+            tag:'input',
+            ph:'Enter Option2',
+            type:'text'
+        },
+        {
+            name:'opt3',
+            lbl:'Option3',
+            tag:'input',
+            ph:'Enter Option3',
+            type:'text'
+        },
+        {
+            name:'opt4',
+            lbl:'Option4',
+            tag:'input',
+            ph:'Enter Option4',
+            type:'text'
+        } ,
+        {
+            name:'type',
+            lbl:'Type',
+            tag:'input',
+            type:'radio',
+            options:['Single','Multiple']
+        },
+        {
+            name:'ans',
+            lbl:'Answer',
+            tag:'select',
+            options:['A','B','C','D','AB','AC','AD','BC','BD','CD','ABC','BCD','ACD','ABCD']
+        }
+       ]
+        return <div>
+              <h1 className='text-center bg-primary text-white py-3 mb-4'>Questions Form</h1>
+              <div className='container-fluid'>
+                 {
+                    inputControls.map((obj,ind)=>{
+                       switch(obj.tag){
+                        case 'textarea':
+                            return <TextArea key={ind} {...obj} />
+                        case 'input':
+                            return <Input key={ind} {...obj} />
+                        case 'select':
+                            return <Select key={ind} {...obj} />
+                       }
+                    })
+                 }
+
+                 <div className="row mb-3">
+                   
+                   <div className="offset-sm-5 col-sm-3">
+                     <button className='btn btn-primary'>Submit</button>
+                  </div>
+                </div>
+
+              </div>
+              
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

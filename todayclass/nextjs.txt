@@ -1,0 +1,16 @@
+1. open command prompt
+
+   >create-next-app
+
+       Y
+       N : npm i -g create-next-app
+
+2. run below command 
+
+   >create-next-app <app name>
+
+3. to run the application 
+
+   >npm run dev 
+
+4. 

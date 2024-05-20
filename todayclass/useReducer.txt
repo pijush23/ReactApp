@@ -1,0 +1,139 @@
+1. create react application 
+
+   >npx create-next-app <app name>
+
+2. create required components (A, B, C  ) and render inside App component . 
+
+3. create init.js and place initial data.  
+
+    init.js 
+
+    export const init={
+        name:'',
+        loc:''
+    }
+
+4. create a function(reducer). 
+
+appReducer.js
+
+const appReducer=(state,action)=>{
+    switch(action.type){
+
+    }
+     
+    return state;
+ }
+ 
+ export default appReducer
+
+4. place useReducer inside App component 
+
+  App.js 
+  
+  import { useReducer } from 'react';
+  import {init} from './init'
+  import appReducer from './appReducer';
+
+  const [state,dispatch]=useReducer(appReducer,init)
+
+  state variable represents the current store data.
+  dispatch,it's a function , used to dispatch to data to reducer.
+
+5. Make the state and dispatch available to all direct or indirect childrens of root component by using context.
+
+6. implement the context in react application : 
+
+    a . create a context  and export Provider and context object. 
+        
+        appContext.js 
+
+        import {createContext} from 'react'
+
+        export const appContext=createContext()
+        
+        const {Provider} =appContext
+        
+        export default Provider
+
+    b . Provide the data(state,dispatch) to the context and make it available to all childrens(direct or indirect)
+
+       App.js 
+
+       import Provider from './appContext';
+
+       <Provider  value={{state,dispatch}}>
+            <A />
+            <B />
+            <C />
+       </Provider>
+
+    c . Get the  data(state,dispatch) from context . 
+
+    A.js 
+
+    import React, {useContext } from 'react'
+    import {appContext} from './appContext'
+
+    const A = () => {
+      const ctxData=useContext(appContext)
+      return (
+        <div>
+            <h1>A</h1>
+           
+        </div>
+      )
+    }
+    
+    export default A
+
+7. From A,B components, need to dispatch the data to the reducer.
+
+    A.js 
+    
+    const ctxData=useContext(appContext)
+   
+    ctxData.dispatch({
+        type:'NAME_UPDATE',
+        payload:"Sachin"
+    })
+
+8. In appReducer,  need update the data and return it.
+
+appReducer.js 
+
+const appReducer=(state,action)=>{
+    switch(action.type){
+     case 'NAME_UPDATE':
+         state={
+             ...state,
+             name:action.payload
+         }
+         break;
+   
+    return state;
+ }
+ 
+ export default appReducer
+
+9. In C component, get the data from store .
+
+import React, { useContext } from 'react'
+import {appContext} from './appContext'
+
+const C = () => {
+   const ctxData= useContext(appContext)
+  return (
+    <div>
+        <h1>C</h1>
+        <h3>Name: {ctxData.state.name} </h3>
+        <h3>Location:{ctxData.state.loc}</h3>
+    </div>
+  )
+}
+
+export default C
+
+ 
+       
+

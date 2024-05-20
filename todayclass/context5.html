@@ -1,0 +1,83 @@
+<script src="react.development.js"></script>
+<script src="babel.js"></script>
+<script src="react-dom.development.js"></script>
+
+<div id="root"></div>
+
+
+<script type="text/babel">
+//1. create context 
+const ctx=React.createContext()
+
+const E=()=>{
+        const ctxData=React.useContext(ctx)
+        return <div>
+             <h1>E:{ctxData}</h1>
+            </div>
+    }
+const D=()=>{
+        return <div>
+             <h1>D</h1>
+             <E />
+            </div>
+    }
+ const C=()=>{
+    const ctxData=React.useContext(ctx)
+        return <div>
+             <h1>C:{ctxData}</h1>
+            </div>
+    }
+ const B=()=>{
+        return <div>
+             <h1>B</h1>
+             <C />
+             <D />
+            </div>
+    }
+const A=()=>{
+        return <div>
+             <h1>A</h1>
+             <B />
+            </div>
+    }
+    const App=()=>{
+        const [data,setData]=React.useState({})
+        const [result,setResult]=React.useState(0)
+        const fnChange=(eve)=>{
+            const {id,value}=  eve.target
+            // let _data=data;
+            // _data[id]=Number(value)
+            // setData(_data)
+            setData({...data,[id]:value})
+        }
+        const fnSubmit=()=>{
+            let sum=data.n1+data.n2
+            setResult(sum)
+        }
+        return <div>
+             <h1>App</h1>
+             <p>
+                No1:<input id='n1' onChange={fnChange} />
+             </p>
+             <p>
+                No2:<input id='n2' onChange={fnChange}  />
+             </p>
+             <p>
+                  <button onClick={fnSubmit}>Submit</button>
+             </p>
+
+             <ctx.Provider value={result}>
+                <A />
+             </ctx.Provider>
+           
+            </div>
+    }
+    var root=ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+
+</script>
+
+
+
+
+

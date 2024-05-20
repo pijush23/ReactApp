@@ -1,0 +1,49 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+   
+    const App=()=>{
+       const [items,setItems]=React.useState([]);
+       const [cnt,setCnt]=React.useState(0);
+       const [isPending, startTransition] = React.useTransition()
+       const fnClick=()=>{
+            setCnt(cnt+1)
+            startTransition(()=>{
+                let _items=[]
+                for(let i=0;i<30000;i++){
+                    _items.push('Item no '+i)
+                }
+               setItems(_items)
+            })
+       }
+       return <div>
+            <h3>{cnt}</h3> 
+            <button onClick={fnClick}>Increment</button>
+            {isPending  ? 'Loading....' :
+            <ol>
+                {
+                    items.map((v,i)=>{
+                        return <li key={i}>{v}</li>
+                    })
+                }
+            </ol>
+        }
+        </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

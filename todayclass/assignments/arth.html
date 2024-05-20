@@ -1,0 +1,70 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+
+
+<script type="text/babel">
+   
+    const App=()=>{
+        const [data,setData]=React.useState({}) 
+        const [msg,setMsg]=React.useState(0)
+        const fnChange=(eve)=>{
+            const  {id,value}=eve.target 
+            //let o=data; 
+            //o[id]=value 
+            // setData(o)
+            setData({...data,[id]:Number(value)})
+        }
+
+        const fnClick=(eve)=>{
+            let name=eve.target.name;
+            const {n1,n2}=data
+            let result=0
+            switch(name){
+                case 'sum':
+                    result=n1+n2
+                    break;
+                case 'sub':
+                     result=n1-n2
+                    break;
+                case 'mul':
+                result=n1*n2
+                    break;
+                case 'div':
+                result=n1/n2
+                    break;
+                case 'mod':
+                result=n1%n2
+                    break;
+            }
+            setMsg(result)
+        }
+
+        return <div>
+               <p>No1:<input id="n1" onChange={fnChange}  /></p> 
+               <p>No2:<input id="n2" onChange={fnChange}  /></p> 
+                <button name='sum' onClick={fnClick}>Sum</button>
+                <button name='sub' onClick={fnClick}>Sub</button>
+                <button name='mul' onClick={fnClick}>Mul</button>
+                <button name='div' onClick={fnClick}>Div</button>
+                <button name='mod' onClick={fnClick}>Mod</button>
+               <h3>{msg}</h3>
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

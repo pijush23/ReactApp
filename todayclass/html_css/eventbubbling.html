@@ -1,0 +1,26 @@
+<style>
+    div{
+        border: 1px solid red;
+        padding:30px
+    }
+</style>
+<div id="div1" onclick="f1()">
+    <div id="div2" onclick="f2()">
+        <div id="div3" onclick="f3(event)">
+
+        </div>
+    </div>
+</div>
+
+<script>
+     function f1(){
+        alert('div1')
+     }
+     function f2(){
+        alert('div2')
+     }
+     function f3(eve){
+        eve.stopPropagation()
+        alert('div3')
+     }
+</script>

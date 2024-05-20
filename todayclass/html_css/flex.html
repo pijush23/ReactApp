@@ -1,0 +1,42 @@
+<style>
+    body{
+        margin: 0px;
+    }
+    ul{
+        list-style-type: none;
+        margin:0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        background: yellow;
+        line-height: 50px;
+    }
+    ul > li{
+        margin-right: 15px;
+        letter-spacing: 4px;
+    }
+
+    .grid-container{
+        display: grid;
+        grid-template-columns: 2fr 10fr 2fr;
+        grid-template-rows: 100vh;
+    }
+    .grid-container>div:nth-child(odd){
+        background-color: red;
+    }
+    .grid-container>div:nth-child(even){
+        background-color: blue;
+    }
+</style>
+<ul>
+    <li>Home</li>
+    <li>About</li>
+    <li>Contact</li>
+</ul>
+
+<div class="grid-container">
+    <div>ASIDE</div>
+    <div>Content</div>
+    <div>Advertisement</div>
+</div>

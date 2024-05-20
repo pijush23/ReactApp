@@ -1,0 +1,40 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+
+
+<div id="root"></div>
+
+<style>
+
+</style>
+
+<script type="text/babel">
+    const A=React.memo(()=>{
+        console.log('A component')
+        return <h1>A </h1>
+    })
+    const B=()=>{
+        console.log('B component')
+        const [cnt,setCnt]=React.useState(0);
+        return <div>
+            <A />
+            <h1>B</h1>
+            <h3>{cnt}</h3>
+            <button onClick={()=>setCnt(cnt+1)}>click</button>
+            </div>
+    }
+    const App=()=>{
+        return  <div>
+            <B />
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+

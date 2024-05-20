@@ -1,0 +1,140 @@
+1. Create react application 
+
+2. Integrate redux in your react application (init,reducer,store)
+
+3. load saga lib.
+
+  >npm i redux-saga
+
+4. Create saga middleware 
+
+   import createSagaMiddleware from 'redux-saga';
+
+  const sagaMiddleware=createSagaMiddleware()
+
+5. register saga middleware with store.
+
+  export const appStore=configureStore({
+
+    middleware:[sagaMiddleware]
+})
+
+6. create generator functions to handle our functionlity.
+   
+    function* getPhotos(){
+
+   }
+
+  function* getPosts(){
+
+  }
+
+7. merge saga functions at file level
+
+function* photosSaga(){
+    // 2 saga
+   yield takeLatest('GET_PHOTOS',getPhotos)
+   yield takeLatest('INSERT_PHOTO',insertPhoto)
+}
+
+function* postsSaga(){
+    // 2 function register
+    yield takeLatest('GET_POSTS',getPosts)
+    yield takeLatest('DELETE_POST',deletePost)
+
+}
+
+8. merge saga files at application level 
+
+rootSaga.js
+
+import photosSaga from "./photosSaga";
+import postsSaga from "./postsSaga";
+import {all} from 'redux-saga/effects'
+
+function* rootSaga(){
+  yield  all([
+        photosSaga(),
+        postsSaga()
+    ])
+}
+
+export default rootSaga
+
+9. register all the rootSaga functions with sagaMiddleware
+
+import {configureStore} from '@reduxjs/toolkit'
+import logger from 'redux-logger'
+import { userReducer } from '../reducers/userReducer'
+import { commentsReducer } from '../reducers/commentsReducer'
+import { sagaReducer } from '../reducers/sagaReducer'
+import thunk from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from '../sagas/rootSaga'
+const sagaMiddleware=createSagaMiddleware()
+
+export const appStore=configureStore({
+    reducer:{
+        userReducer,
+        commentsReducer,
+        sagaReducer
+    },
+    middleware:[logger,thunk,sagaMiddleware]
+})
+
+sagaMiddleware.run(rootSaga)
+
+10. call saga functions
+
+   const fnGetPosts=()=>{
+    appStore.dispatch({
+      type:'GET_POSTS'
+    })
+  }
+
+  const fnGetPhotos=()=>{
+    appStore.dispatch({
+      type:'GET_PHOTOS'
+    })
+  }
+
+11.  Call your AJAX function 
+
+import { takeLatest,call,put } from "redux-saga/effects"
+import { ServerCall } from '../ServerCall/ServerCall'
+
+function* getPosts(){
+    const res= yield call(ServerCall.sendGetReq,'https://jsonplaceholder.typicode.com/posts')
+ 
+}
+
+12. Give the response to reducer 
+
+ function* getPosts(){
+    const res= yield call(ServerCall.sendGetReq,'https://jsonplaceholder.typicode.com/posts')
+   yield put({
+      type:'POSTS_UPDATE',
+      payload:res.data
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

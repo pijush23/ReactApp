@@ -1,0 +1,39 @@
+
+<script src="react.development.js"></script>
+<script src="react-dom.development.js"></script>
+<script src="babel.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    const MyComp=()=>{
+        React.useEffect(()=>{
+            console.log('MyComp Mounting completed')
+        },[])
+        React.useEffect(()=>{
+            return ()=>{
+                console.log('I am going to unmount...')
+            }
+        },[])
+        return <h2> MY Component</h2>
+    }
+    const App=()=>{
+        const [isChecked,setIsChecked]=React.useState(true)
+    
+
+        const fnChange=(eve)=>{
+            setIsChecked(eve.target.checked)
+        }
+        return <div>
+               <h1>App</h1>
+               <input checked={isChecked} type='checkbox' onChange={fnChange} />
+               {isChecked && <MyComp />}
+            </div>
+    }
+
+    var root= ReactDOM.createRoot(document.getElementById('root'))
+
+    root.render(<App />)
+
+</script>
+
